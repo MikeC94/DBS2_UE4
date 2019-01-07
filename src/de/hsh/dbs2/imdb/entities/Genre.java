@@ -11,26 +11,31 @@ import javax.persistence.*;
  * @author A-Team
  */
 @Entity
-@Table(name = "genre")
 public class Genre {
 
 	@Id
-	@Column(name = "id")
-	@GeneratedValue
-	private int id;
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	private long id;
 
-	@Column(name = "genre")
+	@Column(unique = true)
 	private String genre;
 
 	@ManyToMany(mappedBy = "genres")
 	private Set<Movie> movies = new HashSet<Movie>();
 
 	/**
+	 * Standardconstruktor
+	 */
+	public Genre() {
+		super();
+	}
+
+	/**
 	 * Diese Methode gibt die ID zurück
 	 *
 	 * @return ID
 	 */
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -39,7 +44,7 @@ public class Genre {
 	 *
 	 * @param id ID
 	 */
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

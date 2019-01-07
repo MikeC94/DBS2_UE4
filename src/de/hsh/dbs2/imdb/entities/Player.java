@@ -10,29 +10,33 @@ import javax.persistence.*;
  * @author A-Teams
  */
 @Entity
-@Table(name = "player")
 public class Player {
 
 	@Id
-	@Column(name = "id")
-	@GeneratedValue
-	private int id;
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	private long id;
 
-	@Column(name = "name")
+	@Column(unique = true)
 	private String name;
 
-	@Column(name = "sex")
 	private char sex;
 
-	@OneToMany(mappedBy = "movie")
+	@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
 	private Set<MovieCharacter> character = new HashSet<MovieCharacter>();
+
+	/**
+	 * Standardconstruktor
+	 */
+	public Player() {
+		super();
+	}
 
 	/**
 	 * Diese Methode gibt die Id zurück.
 	 *
 	 * @return Id
 	 */
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -41,7 +45,7 @@ public class Player {
 	 *
 	 * @param id Id
 	 */
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -80,7 +84,7 @@ public class Player {
 	public void setSex(char sex) {
 		this.sex = sex;
 	}
-	
+
 	/**
 	 * Diese Methode gibt die Liste der Filmcharaktere zurück.
 	 * 

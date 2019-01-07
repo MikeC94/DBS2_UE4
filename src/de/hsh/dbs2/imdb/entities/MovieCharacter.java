@@ -8,21 +8,16 @@ import javax.persistence.*;
  * @author A-Team
  */
 @Entity
-@Table(name = "moviecharacter")
 public class MovieCharacter {
 
 	@Id
-	@Column(name = "id")
-	@GeneratedValue
-	private int id;
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	private long id;
 
-	@Column(name = "character")
 	private String character;
 
-	@Column(name = "alias")
 	private String alias;
 
-	@Column(name = "pos")
 	private int pos;
 
 	@ManyToOne
@@ -32,11 +27,18 @@ public class MovieCharacter {
 	private Player player;
 
 	/**
+	 * Standardconstruktor
+	 */
+	public MovieCharacter() {
+		super();
+	}
+
+	/**
 	 * Diese Methode gibt die ID zurück.
 	 *
 	 * @return ID
 	 */
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -45,7 +47,7 @@ public class MovieCharacter {
 	 *
 	 * @param id ID
 	 */
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

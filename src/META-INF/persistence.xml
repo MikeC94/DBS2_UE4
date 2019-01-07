@@ -1,18 +1,22 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
-http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-	version="2.0">
-	<persistence-unit name="dbcon">
-		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="dbcon"
+		transaction-type="RESOURCE_LOCAL">
+		<class>model.Person</class>
 		<properties>
-			<property name="hibernate.connection.driver_class" value="oracle.jdbc.driver.OracleDriver" />
-			<property name="hibernate.connection.url" value="jdbc:oracle:thin:@localhost:1111/db01" />
-			<property name="hibernate.connection.username" value="ebz-sqk-u1" />
-			<property name="hibernate.connection.password" value="testit2_" />
-			<property name="hibernate.show_sql" value="true" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:oracle:thin:@localhost:1111:db01" />
+			<property name="javax.persistence.jdbc.user"
+				value="ebz-sqk-u1" />
+			<property name="javax.persistence.jdbc.password"
+				value="testit2_" />
+			<property name="javax.persistence.jdbc.driver"
+				value="oracle.jdbc.OracleDriver" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
 		</properties>
 	</persistence-unit>
 </persistence>

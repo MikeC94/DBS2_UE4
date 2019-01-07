@@ -10,36 +10,38 @@ import javax.persistence.*;
  * @author A-Team
  */
 @Entity
-@Table(name = "movie")
 public class Movie {
 
 	@Id
-	@Column(name = "id")
-	@GeneratedValue
-	private int id;
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	private long id = 0;
 
-	@Column(name = "title")
 	private String title;
 
-	@Column(name = "year")
 	private int year;
 
-	@Column(name = "type")
-	private char type;
+	private String type;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "moviegenre")
 	private Set<Genre> genres = new HashSet<Genre>();
 
-	@OneToMany(mappedBy="movie")
+	@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
 	private Set<MovieCharacter> character = new HashSet<MovieCharacter>();
+
+	/**
+	 * Standardconstruktor
+	 */
+	public Movie() {
+		super();
+	}
 
 	/**
 	 * Diese Methode gibt die ID zurück
 	 *
 	 * @return ID
 	 */
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -48,7 +50,7 @@ public class Movie {
 	 *
 	 * @param id ID
 	 */
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -93,7 +95,7 @@ public class Movie {
 	 *
 	 * @return Typ
 	 */
-	public char getType() {
+	public String getType() {
 		return type;
 	}
 
@@ -102,7 +104,7 @@ public class Movie {
 	 *
 	 * @param type Typ
 	 */
-	public void setType(char type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
@@ -116,12 +118,30 @@ public class Movie {
 	}
 
 	/**
+	 * Diese Methode setzt die Genres
+	 * 
+	 * @param genres Genres
+	 */
+	public void setGenre(Set<Genre> genres) {
+		this.genres = genres;
+	}
+
+	/**
 	 * Diese Methode gibt die Lister der Filmcharaktere zurück.
 	 * 
 	 * @return Filmcharaktere
 	 */
 	public Set<MovieCharacter> getCharacter() {
 		return this.character;
+	}
+
+	/**
+	 * Diese Methode setzt die Filmcharakter
+	 * 
+	 * @param character Filmcharakter
+	 */
+	public void setCharacter(Set<MovieCharacter> character) {
+		this.character = character;
 	}
 
 	/**
